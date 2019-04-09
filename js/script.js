@@ -1,18 +1,24 @@
+const pauseImagePath = 'url(images/Pause.png)';
+const playImagePath = 'url(images/Play.png)';
+
 var isPlaying = false;
 
+// This function is called when the mainButton element is clicked
 function mainButtonAction() {
      var mainButton = document.getElementById("mainButton");
-     if (!isPlaying) {
-          isPlaying = true;
+     if (!isPlaying) {                                           // Checks if music is already playing
+          isPlaying = true;                                      // If music is not playing make it play now
 
-          var urlString = 'url(images/Pause.png)';
-          mainButton.style.backgroundImage = urlString;
-          mainButton.style.backgroundPosition = "50% 50%";
+          // This is where the code for playing a music stream should go using a music API
+
+          mainButton.style.backgroundImage = pauseImagePath;     // Updates the backgroundImage of the mainButton to the Pause icon
+          mainButton.style.backgroundPosition = "50% 50%";       // Updates the backgroundPosition of the mainButton for the Pause icon
      } else {
-          isPlaying = false;
+          isPlaying = false;                                     // If music is playing make it pause now
 
-          var urlString = 'url(images/Play.png)';
-          mainButton.style.backgroundImage = urlString;
-          mainButton.style.backgroundPosition = "54% 50%";
+          // This is where the code for pausing a music stream should go using a music API
+
+          mainButton.style.backgroundImage = playImagePath;      // Updates the backgroundImage of the mainButton to the Play icon
+          mainButton.style.backgroundPosition = "54% 50%";       // Updates the backgroundPosition of the mainButton for the Play icon
      }
 }
