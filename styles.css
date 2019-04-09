@@ -1,0 +1,51 @@
+html, body {
+     width: 100vw;            /* Sets width of body to the width of the viewport */
+     height: 100vh;           /* Sets height of body to the height of the viewport */
+
+     margin: 0;               /* Clears the margin for the body element */
+     padding: 0;              /* Clears the padding for the body element */
+}
+
+body {
+     background-color: #E0FBFC;    /* Sets the background color of the body element */
+
+     display: flex;
+     flex-direction: column;       /* Stacks elements in a column */
+     align-items: center;          /* Centers elements horizontally */
+     justify-content: center;      /* Centers elements vertically */
+}
+
+h1 {
+     margin-bottom: 8vh;           /* Adds a bottom margin to the header to create space between it and the mainButton */
+
+     color: #4B4E6D;               /* Sets the color of the text in the header element */
+     text-align: center;           /* Centers text horizontally in the header element */
+     font-size: 4em;               /* Sets a larger font size for the text in the header element */
+     font-family: 'Fredoka One',   /* Sets a series of custom fonts for text in the header element */
+                   cursive;
+}
+
+#mainButton {
+                    /* The width and height are set to the same value to create a perfect square */
+     width: 8vw;    /* Sets the width of the mainButton element to 8vw */
+     height: 8vw;   /* Sets the height of the mainButton element to 8vw */
+
+     background-image: url("images/Play.png");    /* Sets the background image of the mainButton element */
+     background-repeat: no-repeat;                /* Ensures that the background image is not repeated to fill the element's background */
+     background-position: 54% 50%;                /* Positions the background image in the center of the mainButton element */
+     background-size: 38% 40%;                    /* Sets the size of the background image of the mainButton element */
+
+     background-color: #F7567C;    /* Sets the background color of the mainButton element */
+     border-radius: 50%;           /* Rounds the corners of the mainButton element so that it appears as a circle */
+
+     transition: transform 0.2s ease-in, box-shadow 0.2s;   /* Establishes which properties will animate when transformed */
+}
+
+#mainButton:hover, #mainButton:focus {
+     transform: scaleY(1.1) scaleX(1.1);     /* Scales up the mainButton element when the element is hovered over */
+     box-shadow: 0px 0px 16px #F7567C;       /* Adds a shadow to the mainButton element when the element is hovered over */
+}
+
+#mainButton:active {
+     transform: scaleY(0.9) scaleX(0.9);     /* Scales down the mainButton element when the element is clicked */
+}
