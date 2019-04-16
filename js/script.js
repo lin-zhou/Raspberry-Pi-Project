@@ -42,14 +42,16 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(apiToken);
 
+var startSong = 5;
+var startPosition = 0;
 function playMusic() {
      var options = {
       device_id: thisDeviceID,
-          "context_uri": "spotify:album:5ht7ItJgpBH7W6vJ5BqpPr",      // This is a Carly Rae Jepsen album.
+          "context_uri": "spotify:user:12151715008:playlist:1MX4SSCPEjFtfW7DLv7YGp",     // This is a personal playlist
           "offset": {
-               "position": 5     // This is the number in the album that the button starts playing at
+               "position": startSong     // This is the number in the album that the button starts playing at
           },
-          "position_ms": 0
+          "position_ms": startPosition
      };
 
      spotifyApi.play(options, function (err, data) {
@@ -62,9 +64,10 @@ function playMusic() {
 }
 
 function pauseMusic() {
-
+     spotifyApi.pause();
+     startSong = 5;          // Change this to be whatever song we left off at
+     startPosition = 0;      // It'd be super cool if this could set to the position_ms at time of pausing, but alas
 }
-
 
 // This function is called when the mainButton element is clicked
 function mainButtonAction() {
@@ -72,14 +75,14 @@ function mainButtonAction() {
      if (!isPlaying) {                                           // Checks if music is already playing
           isPlaying = true;                                      // If music is not playing make it play now
           
-          playMusic();                                           // Music plays, yay!
+          playMusic();                                           // Music plays, yay! Unfortunately, it starts from the beginning each time.
 
           mainButton.style.backgroundImage = pauseImagePath;     // Updates the backgroundImage of the mainButton to the Pause icon
           mainButton.style.backgroundPosition = "50% 50%";       // Updates the backgroundPosition of the mainButton for the Pause icon
      } else {
           isPlaying = false;                                     // If music is playing make it pause now
 
-          pauseMusic();
+          pauseMusic();                                          // Pauses music
 
           mainButton.style.backgroundImage = playImagePath;      // Updates the backgroundImage of the mainButton to the Play icon
           mainButton.style.backgroundPosition = "54% 50%";       // Updates the backgroundPosition of the mainButton for the Play icon
