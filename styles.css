@@ -25,6 +25,13 @@ h1 {
                    cursive;
 }
 
+#logInButton {
+
+     width: 10vw;
+     height: 4wv;
+
+}
+
 #mainButton {
                     /* The width and height are set to the same value to create a perfect square */
      width: 8vw;    /* Sets the width of the mainButton element to 8vw */

@@ -1,0 +1,28 @@
+{
+  "name": "raspberry-pi-programmable-button",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "consolidate": "^0.15.1",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "passport": "^0.4.0",
+    "passport-spotify": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanmanderson/Raspberry-Pi-Programmable-Button.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryanmanderson/Raspberry-Pi-Programmable-Button/issues"
+  },
+  "homepage": "https://github.com/ryanmanderson/Raspberry-Pi-Programmable-Button#readme"
+}
