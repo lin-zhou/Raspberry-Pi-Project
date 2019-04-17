@@ -4,8 +4,8 @@ const playImagePath = 'url(images/Play.png)';
 var isPlaying = false;
 
 // Tokens must be changed every hour
-const apiToken = '<Spotify Web API Token goes here>';
-const sdkToken = '<Web Playback SDK Token goes here>';
+const apiToken = 'BQDPZZrLZqm5Muz1qxyF7DPvf8DdCIosH3km3W159q92cOT1zd-L2LfeNdbdqiS_wzO6WPWLbJSGVlePltTEip5wk71zKDvUsyRglPCBC5lVit_AEjY0aykJ4R57vu5JRL9-6RjlkZ3b9EC28o2ymAZxFhJbxoKFUE8S-5LnMqWHocqcgDmcfOlUiol7Fkv6I0wt5dFFWw';
+const sdkToken = 'BQCm9kRav_uEVCSg-pqDooGZNiTI3Qm5upa3hLt_0kPWoO_6dZ6YUkv8rQX8res2lkSSS9YGak76YUcN_Fgii9R03V3xr5thSpmfswIyPxcpDcIXBsuM6VKLRDqacGtHe_PmZ_kIV-EZ90qJZkZloPxOb635Wty75GO48n-Ziw';
 
 let thisDeviceID = null;
 
