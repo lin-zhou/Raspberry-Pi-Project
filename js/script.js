@@ -13,13 +13,11 @@ var songOffset = 0;
 var startPosition = 0;
 var lastSong = null;
 
+// Tests if two objects are of equal value
 function equals(a, b) {
-     // Create arrays of property names
      var aProps = Object.getOwnPropertyNames(a);
      var bProps = Object.getOwnPropertyNames(b);
  
-     // If number of properties is different,
-     // objects are not equivalent
      if (aProps.length != bProps.length) {
          return false;
      }
@@ -27,15 +25,11 @@ function equals(a, b) {
      for (var i = 0; i < aProps.length; i++) {
          var propName = aProps[i];
  
-         // If values of same property are not equal,
-         // objects are not equivalent
          if (a[propName] !== b[propName]) {
              return false;
          }
      }
  
-     // If we made it this far, objects
-     // are considered equivalent
      return true;
  }
 
@@ -58,6 +52,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
                startPosition = state.position;
           }
 
+          // Will start on correct song if paused
           if (lastSong == null) {
                lastSong = state.track_window.current_track.id;
           } else if (!equals(state.track_window.current_track.id, lastSong)) {
