@@ -52,7 +52,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
                startPosition = state.position;
           }
 
-          // Will start on correct song if paused
+          // If playing a different song than last state, increase the song offset to match current song
           if (lastSong == null) {
                lastSong = state.track_window.current_track.id;
           } else if (!equals(state.track_window.current_track.id, lastSong)) {
@@ -87,7 +87,7 @@ function playMusic() {
           "offset": {
                "position": songOffset     // This is the number in the album that the button starts playing at
           },
-          "position_ms": startPosition
+          "position_ms": startPosition    // This is the place in the song that the button starts playing at
      };
 
      spotifyApi.play(options, function (err, data) {
@@ -109,7 +109,7 @@ function mainButtonAction() {
      if (!isPlaying) {                                           // Checks if music is already playing
           isPlaying = true;                                      // If music is not playing make it play now
           
-          playMusic();                                           // Music plays, yay! Unfortunately, it starts from the beginning each time.
+          playMusic();                                           // Music plays, yay!
 
           mainButton.style.backgroundImage = pauseImagePath;     // Updates the backgroundImage of the mainButton to the Pause icon
           mainButton.style.backgroundPosition = "50% 50%";       // Updates the backgroundPosition of the mainButton for the Pause icon
