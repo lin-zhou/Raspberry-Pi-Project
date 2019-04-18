@@ -9,10 +9,35 @@ const sdkToken = '<sdk token here>';
 
 let thisDeviceID = null;
 
-var info = null;
-
-var startSong = 5;
+var songOffset = 0;
 var startPosition = 0;
+var lastSong = null;
+
+function equals(a, b) {
+     // Create arrays of property names
+     var aProps = Object.getOwnPropertyNames(a);
+     var bProps = Object.getOwnPropertyNames(b);
+ 
+     // If number of properties is different,
+     // objects are not equivalent
+     if (aProps.length != bProps.length) {
+         return false;
+     }
+ 
+     for (var i = 0; i < aProps.length; i++) {
+         var propName = aProps[i];
+ 
+         // If values of same property are not equal,
+         // objects are not equivalent
+         if (a[propName] !== b[propName]) {
+             return false;
+         }
+     }
+ 
+     // If we made it this far, objects
+     // are considered equivalent
+     return true;
+ }
 
 window.onSpotifyWebPlaybackSDKReady = () => {
      const player = new Spotify.Player({
@@ -29,7 +54,17 @@ window.onSpotifyWebPlaybackSDKReady = () => {
      // Playback status updates
      player.addListener('player_state_changed', state => { 
           console.log(state);
-          startPosition = state.position;
+          if (state.paused) {
+               startPosition = state.position;
+          }
+
+          if (lastSong == null) {
+               lastSong = state.track_window.current_track.id;
+          } else if (!equals(state.track_window.current_track.id, lastSong)) {
+               songOffset++;
+               lastSong = state.track_window.current_track.id;
+          }
+
      });
 
      // Ready
@@ -55,7 +90,7 @@ function playMusic() {
       device_id: thisDeviceID,
           "context_uri": "spotify:user:12151715008:playlist:1MX4SSCPEjFtfW7DLv7YGp",     // This is a personal playlist
           "offset": {
-               "position": startSong     // This is the number in the album that the button starts playing at
+               "position": songOffset     // This is the number in the album that the button starts playing at
           },
           "position_ms": startPosition
      };
