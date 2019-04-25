@@ -89,7 +89,7 @@ spotifyApi.setAccessToken(apiToken);
 function playMusic() {
      var options = {
       device_id: thisDeviceID,
-          "context_uri": "<Context URI Here>",     // This is a personal playlist
+          "context_uri": "<Context URI Here>",     // URI of the song/playlist/album
           "offset": {
                "position": songOffset     // This is the number in the album that the button starts playing at
           },
