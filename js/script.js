@@ -4,10 +4,16 @@ const playImagePath = 'url(images/Play.png)';
 var isPlaying = false;
 
 // Tokens must be changed every hour
-const apiToken = '<api token here>';
-const sdkToken = '<sdk token here>';
+const apiToken = '<API Token Here>';
+const sdkToken = '<Web Playback SDK Token Here>';
 
 let thisDeviceID = null;
+
+var pubnub = new PubNub({
+    publishKey: "<Publish Key Here>",
+    subscribeKey: "<Subscribe Key Here>",
+    ssl: true
+});
 
 var songOffset = 0;
 var startPosition = 0;
@@ -83,7 +89,7 @@ spotifyApi.setAccessToken(apiToken);
 function playMusic() {
      var options = {
       device_id: thisDeviceID,
-          "context_uri": "spotify:user:12151715008:playlist:1MX4SSCPEjFtfW7DLv7YGp",     // This is a personal playlist
+          "context_uri": "<Context URI Here>",     // This is a personal playlist
           "offset": {
                "position": songOffset     // This is the number in the album that the button starts playing at
           },
@@ -122,3 +128,47 @@ function mainButtonAction() {
           mainButton.style.backgroundPosition = "54% 50%";       // Updates the backgroundPosition of the mainButton for the Play icon
      }
 }
+
+pubnub.addListener({
+    status: function(statusEvent) {
+        if (statusEvent.category === "PNConnectedCategory") {
+            var payload = {
+                my: 'payload'
+            };
+            pubnub.publish(
+                {
+                    message: payload
+                },
+                function (status) {
+                    // handle publish response
+                }
+            );
+        }
+    },
+    message: function(message) {
+         const response = message['message']['resp']
+		  if ('play' ==  response && !isPlaying) {                   // Checks if music is already playing
+			  isPlaying = true;                                      // If music is not playing make it play now
+
+			  playMusic();
+
+			   mainButton.style.backgroundImage = pauseImagePath;     // Updates the backgroundImage of the mainButton to the Pause icon
+			   mainButton.style.backgroundPosition = "50% 50%";       // Updates the backgroundPosition of the mainButton for the Pause icon
+		   } else {
+			   isPlaying = false;                                     // If music is playing make it pause now
+
+			   pauseMusic();
+
+			   mainButton.style.backgroundImage = playImagePath;      // Updates the backgroundImage of the mainButton to the Play icon
+			   mainButton.style.backgroundPosition = "54% 50%";       // Updates the backgroundPosition of the mainButton for the Play icon
+		   }
+         
+    },
+    presence: function(presenceEvent) {
+        // handle presence
+    }
+})
+
+pubnub.subscribe({
+    channels: ['spotify-raspberry-control']
+});
